@@ -1,5 +1,5 @@
-const http = require("http");
 
+const http = require("http");
 const fs = require("fs");
 
 const server = http.createServer((req, res) => {
@@ -7,6 +7,7 @@ const server = http.createServer((req, res) => {
         res.end("<h1>This is Home Page</h1>")
     } else if (req.url == '/about') {
         res.end("<h1>This is About Page</h1>")
+
     } else if (req.url == '/getproductdata') {
 
         
