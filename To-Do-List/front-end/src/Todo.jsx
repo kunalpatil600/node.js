@@ -6,15 +6,15 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid'; 
 
 
-const Todo = () => {
-  const [data, setData] = useState([]);
+  const Todo = () => {
+  const [data, setdata] = useState([]);
   const [task, setTask] = useState(''); 
-  const [editId, setEditId] = useState(null); 
+  const [edit, setEdit] = useState(null); 
 
   const getData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/todo');
-      setData(response.data.tasks);
+      setdata(response.data.tasks);
     } catch (err) {
       console.log(err);
     }
@@ -28,11 +28,11 @@ const Todo = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     if (task.trim()) {
-      if (editId) {
+      if (edit) {
         
         try {
           await axios.put(`http://localhost:8080/todo/${editId}`, { task });
-          setEditId(null); 
+          setEdit(null); 
         } catch (err) {
           console.log(err);
         }
@@ -53,7 +53,7 @@ const Todo = () => {
   
   const handleEdit = (taskId, currentTask) => {
     setTask(currentTask); 
-    setEditId(taskId); 
+    setEdit(taskId); 
   };
 
   
@@ -80,7 +80,7 @@ const Todo = () => {
             placeholder="Add a new task"
           />
           <button type="submit" className="">
-            {editId ? 'Update Task' : 'Add Task'}
+            {edit ? 'Update Task' : 'Add Task'}
           </button>
         </div>
       </form>
