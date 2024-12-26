@@ -1,0 +1,5 @@
+.blog-image{
+    height: 92vh;
+    width: 100%;
+    object-fit: cover;
+}
