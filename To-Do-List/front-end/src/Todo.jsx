@@ -91,12 +91,10 @@ import { v4 as uuidv4 } from 'uuid';
             <div>
              
               <span className="task-text">{el.task}</span>
-            </div>
+          </div>
             <div className="todo-buttons">
               <button
-                className=" me-2 "
-                onClick={() => handleEdit(el.id, el.task)}
-              >
+                className=" me-2 " onClick={() => handleEdit(el.id, el.task)}  >
                 Edit
               </button>
               <button
