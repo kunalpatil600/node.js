@@ -1,43 +1,36 @@
-// This code is a full-stack CRUD (Create, Read, Update, Delete) To-Do list application
-//  using Node.js on the backend and React on the frontend. It uses Express and fs 
-//  for file handling in Node.js and Axios for making HTTP requests in React.
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';
 
-
-  const Todo = () => {
-  const [data, setdata] = useState([]);
-  const [task, setTask] = useState(''); 
-  const [edit, setEdit] = useState(null); 
+const Todo = () => {
+  const [data, setData] = useState([]);
+  const [task, setTask] = useState('');
+  const [edit, setEdit] = useState(null);  
 
   const getData = async () => {
     try {
       const response = await axios.get('http://localhost:8080/todo');
-      setdata(response.data.tasks);
+      setData(response.data.tasks);
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   useEffect(() => {
     getData();
   }, []);
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     if (task.trim()) {
-      if (edit) {
-        
+      if (edit) {  
         try {
-          await axios.put(`http://localhost:8080/todo/${editId}`, { task });
+          await axios.put(`http://localhost:8080/todo/${edit}`, { task });
           setEdit(null); 
         } catch (err) {
           console.log(err);
         }
-      } else {
-        
+      } else {  
         try {
           const newTask = { id: uuidv4(), task };
           await axios.post('http://localhost:8080/todo', newTask);
@@ -46,21 +39,19 @@ import { v4 as uuidv4 } from 'uuid';
         }
       }
       setTask('');
-      getData(); 
+      getData();  
     }
   };
 
-  
   const handleEdit = (taskId, currentTask) => {
     setTask(currentTask); 
     setEdit(taskId); 
   };
 
-  
   const handleDelete = async (taskId) => {
     try {
       await axios.delete(`http://localhost:8080/todo/${taskId}`);
-      getData(); 
+      getData();  
     } catch (err) {
       console.log(err);
     }
@@ -79,7 +70,7 @@ import { v4 as uuidv4 } from 'uuid';
             className="form-control todo-input"
             placeholder="Add a new task"
           />
-          <button type="submit" className="">
+          <button type="submit" className="btn btn-primary">
             {edit ? 'Update Task' : 'Add Task'}
           </button>
         </div>
@@ -89,16 +80,17 @@ import { v4 as uuidv4 } from 'uuid';
         {data.map((el) => (
           <li key={el.id} className="list-group-item d-flex justify-content-between align-items-center todo-item">
             <div>
-             
               <span className="task-text">{el.task}</span>
-          </div>
+            </div>
             <div className="todo-buttons">
               <button
-                className=" me-2 " onClick={() => handleEdit(el.id, el.task)}  >
+                className="btn btn-warning me-2"
+                onClick={() => handleEdit(el.id, el.task)} 
+              >
                 Edit
               </button>
               <button
-                className=" "
+                className="btn btn-danger"
                 onClick={() => handleDelete(el.id)}
               >
                 Delete
@@ -112,4 +104,3 @@ import { v4 as uuidv4 } from 'uuid';
 };
 
 export default Todo;
- 

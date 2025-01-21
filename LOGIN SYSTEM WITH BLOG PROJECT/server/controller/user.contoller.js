@@ -44,7 +44,7 @@ const singin=async(req,res)=>{
         jwt.sign({userdata:rest},process.env.priventkey,function(err,token){
             if(err){
                 return res.status(400).json({message:"error while creating token "})
-            }
+               }
             res.cookie("verificationtoken",token)
             return res.status(200).json({message:"user login succesfully", userdata:rest})
         })

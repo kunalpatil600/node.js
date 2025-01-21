@@ -28,7 +28,7 @@ const Get_blog=async(req,res)=>{
     }
 }
 const Get_singlepage=async(req,res)=>{
-    const {blogId}=req.params
+   const {blogId}=req.params
   try {
      const isexist=await blogmodel.findById(blogId)
 
@@ -60,9 +60,9 @@ const Update_blog=async(req,res)=>{
     try {
          const isexist=await blogmodel.findById(userId)
          if(!isexist){
-            return res.status(400).json({message:"blog nor axist"})
+            return res.status(400).json({message:"blog not axist"})
          }
-         if(isexist.userId!=req.user._id){
+         if(isexist.userId!==req.user._id){
             return res.status(400).json({message:"You are not authorized to update this blog"})
          }
          await blogmodel.findByIdAndUpdate(userId,req.body) 

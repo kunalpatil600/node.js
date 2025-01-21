@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem('userdata'));
-  console.log(user);
+  
 
   return (
     <div className="navbar bg-dark text-white">

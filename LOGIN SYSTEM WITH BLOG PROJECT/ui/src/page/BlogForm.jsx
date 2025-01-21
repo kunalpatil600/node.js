@@ -12,7 +12,6 @@ const BlogForm = () => {
     setTags(inputTags.map((tag) => tag.trim()));
   };
   
-
   const handlesubmit=(e)=>{
    e.preventDefault()
    const  userdata={tags,title,content,Author}
